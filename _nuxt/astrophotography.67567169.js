@@ -1,1 +1,0 @@
-import{j as o,a as s,b as e,e as c,o as a,r as n}from"./entry.cae91fd9.js";const r={},_={class:"w-full flex justify-center"},l={class:""},p=e("p",{class:"text-white font-solway"},"My Astrophotography Journey:",-1);function d(f,i){const t=n("test");return a(),s("div",_,[e("div",l,[p,c(t)])])}const m=o(r,[["render",d]]);export{m as default};

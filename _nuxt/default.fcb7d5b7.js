@@ -1,1 +1,0 @@
-import{_ as n,a}from"./Footer.74afd002.js";import{j as c,a as r,e,l as _,o as f}from"./entry.cae91fd9.js";import"./index.6deda6d7.js";import"./steamIcon.45e82e93.js";const l={},m={class:"flex flex-col justify-between min-h-screen"};function i(o,d){const t=n,s=a;return f(),r("div",m,[e(t),_(o.$slots,"default"),e(s)])}const B=c(l,[["render",i]]);export{B as default};
