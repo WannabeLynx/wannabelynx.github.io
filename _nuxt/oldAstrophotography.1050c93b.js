@@ -1,0 +1,1 @@
+import{e as o,f as e,h as s,o as a,q as c}from"./entry.200d210c.js";const n={class:"w-full flex justify-center"},r={class:""},_=e("p",{class:"text-white font-solway"},"My Astrophotography Journey:",-1),i={__name:"oldAstrophotography",setup(l){return(p,h)=>{const t=c("test");return a(),o("div",n,[e("div",r,[_,s(t)])])}}};export{i as default};
