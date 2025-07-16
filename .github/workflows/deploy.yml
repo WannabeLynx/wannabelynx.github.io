@@ -1,9 +1,14 @@
+# .github/workflows/deploy.yml
+
 name: Deploy Nuxt 3 Site to GitHub Pages
 
+# Run this workflow on pushes to the main branch
 on:
   push:
     branches:
-      - main
+      - main # Or whichever branch is your default
+
+# Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
   pages: write
@@ -16,36 +21,36 @@ jobs:
       - name: Checkout your repository
         uses: actions/checkout@v4
 
-      - name: Install pnpm (faster than npm)
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
-          cache: 'pnpm'
+          node-version: "18" # Use a recent LTS version
+          cache: 'npm' # <-- Changed from 'pnpm' to 'npm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install # <-- Changed from 'pnpm install'
 
       - name: Static site generation
-        run: pnpm generate
+        run: npm run generate # <-- Changed from 'pnpm generate'
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          # This is the directory Nuxt 3 builds to
           path: ./.output/public
 
   deploy:
+    # Add a dependency to the build job
     needs: build
+    # Grant GITHUB_TOKEN the permissions required to deploy to GitHub Pages
     permissions:
-      pages: write
-      id-token: write
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    # Deploy to the github-pages environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
