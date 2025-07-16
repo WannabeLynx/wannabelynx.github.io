@@ -1,6 +1,5 @@
 <template>
   <div class="sticky h-screen">
-
     <nav>
       <ul>
         <li>
