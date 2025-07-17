@@ -1,52 +1,53 @@
 <template>
-  <div class="relative h-screen w-screen items-center justify-center flex duration-[1500ms]" :class="isDomOpen ? 'bg-black' : 'bg-black/95'">
-    <Transition
-      enter-active-class="transition-opacity duration-[1500ms] ease-in"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-[1500ms] ease-out"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <StarsBackground v-if="isDomOpen" />
-    </Transition>
+  <div class="relative w-screen min-h-[screen] bg-black/95 lg:h-screen lg:overflow-hidden items-center justify-center flex flex-col">
+    <div class="fixed inset-0 z-0">
+      <StarsBackground />
+    </div>
 
-    <div
-      class="absolute left-[10%] bottom-[20%] transition-transform duration-[1500ms] ease-in-out"
-      :class="{ '-translate-x-[150vw]': !isDomOpen, 'translate-x-0': isDomOpen }"
-    >
-      <Satellite />
-    </div>
-    <div class="absolute bottom-0">
-      <Observatory />
-    </div>
-    <Transition
-      enter-active-class="transition-opacity duration-[3500ms] ease-in"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-[1500ms] ease-out"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div v-if="isDomOpen" class="scale-[0.6] absolute top-[20%] right-[25%]">
+    <div class="flex flex-col items-center gap-y-80 lg:pt-0">
+      <div
+        class="
+          scale-[0.8] mt-60
+          lg:absolute lg:top-[20%] lg:right-[25%] lg:mt-0
+        "
+      >
         <Nebula />
       </div>
-    </Transition>
-    <Transition
-      enter-active-class="transition-opacity duration-[3000ms] ease-in"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-[1500ms] ease-out"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div v-if="isDomOpen" class="absolute top-[30%] left-[25%] scale-[0.5]">
+
+      <div
+        class="
+          scale-[0.8] mt-70 mr-auto flex
+          lg:absolute lg:top-[10%] lg:left-[35%] lg:mt-0 lg:mr-0
+        "
+      >
         <Planet />
       </div>
-    </Transition>
+
+      <div
+        class="
+          transition-transform duration-[1500ms] ease-in-out mt-50 mb-80
+          lg:absolute lg:left-[10%] lg:bottom-[20%] lg:my-0
+        "
+        :class="{
+          'lg:-translate-x-[150vw] opacity-0 lg:opacity-100': !isDomOpen,
+          'lg:translate-x-0': isDomOpen,
+        }"
+      >
+        <Satellite />
+      </div>
+    </div>
     <div
-      class="absolute bottom-2 right-2 transition-transform duration-[1500ms] ease-in-out"
-      :class="{ '-translate-y-[150vw]': !isScreenOpen, 'translate-y-0': isScreenOpen }"
+      class="
+        fixed -bottom-5
+        lg:absolute lg:scale-100 lg:left-auto lg:translate-x-0 lg:bottom-0
+      "
+    >
+      <Observatory />
+    </div>
+
+    <div
+      class="fixed ml-auto inset-7 z-50 transition-transform duration-[1000ms] ease-in-out lg:absolute lg:inset-auto lg:bottom-4 lg:right-4"
+      :class="{ 'translate-y-[150vh]': !isScreenOpen, 'translate-y-0': isScreenOpen }"
     >
       <Screen />
     </div>
@@ -61,6 +62,7 @@ import Nebula from '~/components/common/objects/Nebula.vue';
 import Planet from '~/components/common/objects/Planet.vue';
 import Screen from '~/components/common/objects/Screen.vue';
 import { useRoryStore } from '~/stores/roryStore';
+import { computed, Ref } from 'vue';
 
 const roryStore = useRoryStore();
 const isDomOpen: Ref<boolean> = computed(() => roryStore.isDomOpen);

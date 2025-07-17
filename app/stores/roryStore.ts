@@ -13,6 +13,10 @@ export const useRoryStore = defineStore('roryStore', {
     },
     onToggleDom() {
       this.isDomOpen = !this.isDomOpen;
+      if (!this.isDomOpen) {
+        this.isScreenOpen = false;
+        this.screenType = '';
+      }
     },
     onOpenScreen(screenType: string) {
       this.isScreenOpen = true;

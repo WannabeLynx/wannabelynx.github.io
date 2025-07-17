@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex items-end">
+  <div class="relative flex items-end scale-50 lg:scale-100">
       <div id="leftBottom" class="w-30 h-5 border-2 border-r-0 border-black rounded-tl-sm bg-gray-custom-dark"></div>
       <div id="door" @click="toggleDome" class="w-10 border-2 border-black h-15 rounded-t-full z-10 cursor-pointer bg-gray-custom-darker"></div>
       <div id="rightBottom" class="w-30 h-5 border-2 border-l-0 border-black rounded-tr-sm bg-gray-custom-dark"></div>
