@@ -1,58 +1,60 @@
 <template>
-  <div class="bg-black h-full w-full items-center justify-center flex">
-    <Satellite />
-    <div class="relative flex items-end h-full">
-      <div id="leftBottom" class="w-30 h-5 border-2 border-r-0 border-black rounded-tl-sm bg-white"></div>
-      <div id="door" @click="toggleDome" class="w-10 border-2 border-black h-15 rounded-t-full z-10 cursor-pointer bg-gray-200"></div>
-      <div id="rightBottom" class="w-30 h-5 border-2 border-l-0 border-black rounded-tr-sm bg-white"></div>
-      <div id="wall" class="w-68 h-30 border-2 border-b-0 border-t-0 absolute bottom-5 left-1 bg-white"></div>
+  <div class="relative h-screen w-screen items-center justify-center flex duration-[1500ms]" :class="isDomOpen ? 'bg-black' : 'bg-black/95'">
+    <Transition
+      enter-active-class="transition-opacity duration-[1500ms] ease-in"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-opacity duration-[1500ms] ease-out"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <StarsBackground v-if="isDomOpen" />
+    </Transition>
 
-      <div
-      id="leftWindow"
-      class="w-10 h-10 border-2 absolute bottom-10 left-10 bg-gray-900"
-      :class="{ 'shadow-[inset_0_0_10px_rgba(239,68,68,0.8)]': isOpen }"
-      ></div>
-      <div
-      id="rightWindow"
-      class="w-10 h-10 border-2 absolute bottom-10 right-10 bg-gray-900"
-      :class="{ 'shadow-[inset_0_0_10px_rgba(239,68,68,0.8)]': isOpen }"
-      ></div>
-
-      <div id="topWall" class="w-70 h-5 border-2 absolute bottom-35 rounded-sm bg-white"></div>
-      <div id="dome" class="w-68 h-30 border-2 border-b-0 absolute bottom-40 left-1 rounded-t-full bg-white"></div>
-
-      <div
-        id="domeInteriorLeft"
-        class="w-13 h-[118px] bg-gray-800 absolute bottom-40 left-22 rounded-tl-[43%] shadow-[inset_15px_0_10px_rgba(239,68,68,0.7)]"
-      ></div>
-      <div
-        id="domeInteriorRight"
-        class="w-13 h-[118px] bg-gray-800 absolute bottom-40 right-22 rounded-tr-[43%] shadow-[inset_-15px_0_10px_rgba(239,68,68,0.7)]"
-      ></div>
-
-      <div
-        id="leftDome"
-        class="w-14 h-30 border-2 border-b-0 border-r-1 rounded-tl-[55%] bg-white absolute bottom-40 left-21 transition-transform duration-500 ease-in-out"
-        :class="{ '-translate-x-[63%]': isOpen }"
-      ></div>
-
-      <div
-        id="rightDome"
-        class="w-14 h-30 border-2 border-b-0 border-l-1 rounded-tr-[55%] bg-white absolute bottom-40 right-21 transition-transform duration-500 ease-in-out"
-        :class="{ 'translate-x-[63%]': isOpen }"
-      ></div>
+    <div
+      class="absolute left-[10%] bottom-[20%] transition-transform duration-[1500ms] ease-in-out"
+      :class="{ '-translate-x-[150vw]': !isDomOpen, 'translate-x-0': isDomOpen }"
+    >
+      <Satellite />
     </div>
+    <div class="absolute bottom-0">
+      <Observatory />
+    </div>
+    <Transition
+      enter-active-class="transition-opacity duration-[3500ms] ease-in"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-opacity duration-[1500ms] ease-out"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div v-if="isDomOpen" class="scale-[0.6] absolute top-[20%] right-[25%]">
+        <Nebula />
+      </div>
+    </Transition>
+    <Transition
+      enter-active-class="transition-opacity duration-[3000ms] ease-in"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-opacity duration-[1500ms] ease-out"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div v-if="isDomOpen" class="absolute top-[30%] left-[25%] scale-[0.5]">
+        <Planet />
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
 import Satellite from '~/components/common/objects/Satellite.vue';
-import { ref } from 'vue';
+import Observatory from '~/components/common/objects/Observatory.vue';
+import StarsBackground from '~/components/common/objects/StarsBackground.vue';
+import Nebula from '~/components/common/objects/Nebula.vue';
+import Planet from '~/components/common/objects/Planet.vue';
+import { useRoryStore } from '~/stores/roryStore';
 
-const isOpen = ref(false);
-
-// Function to toggle the dome's state
-const toggleDome = () => {
-  isOpen.value = !isOpen.value;
-};
+const roryStore = useRoryStore();
+const isDomOpen: Ref<boolean> = computed(() => roryStore.isDomOpen);
 </script>

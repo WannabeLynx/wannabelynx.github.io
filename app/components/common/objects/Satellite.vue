@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="flex items-center -rotate-33">
-      <div class="relative w-15 h-4 bg-gray-custom-dark border-y-2 border-[#888]">
+      <div class="relative w-15 h-4 bg-gray-custom-darker border-y-2 border-[#888]">
         <div :class="panelClasses" class="bottom-4 right-5 flex items-center justify-center"><Paragraph class="rotate-90">{{ isOpen ? $t('nav.home') : '' }}</Paragraph></div>
         <div :class="panelClasses" class="top-4 right-5 flex items-center justify-center"><Paragraph class="rotate-90">{{ isOpen ? $t('nav.projects') : '' }}</Paragraph></div>
       </div>
 
-      <div  @click="togglePanels" class="relative z-10 flex items-center justify-center w-20 h-[60px] bg-gray-custom-lighter rounded-[10px] border-2 border-gray-custom-light shadow-[0_0_15px_rgba(200,200,255,0.3)] select-none">
-        <div class="absolute w-5 h-5 bg-gray-custom-light rounded-full -top-3 border-2 border-[#777]"></div>
+      <div @click="togglePanels" class="relative z-10 cursor-pointer flex items-center justify-center w-20 h-[60px] bg-gray-custom-light rounded-[10px] border-2 border-gray-custom-light shadow-[0_0_15px_rgba(200,200,255,0.3)] select-none">
+        <div class="absolute w-5 h-5 bg-gray-custom-dark rounded-full -top-3 border-2 border-[#777]"></div>
         <Paragraph
           weight="bold"
           :color="isOpen ? 'text-red-400 [text-shadow:0_0_12px_theme(colors.red.500/80%)] animate-pulse' : 'text-gray-700'"
@@ -16,9 +16,19 @@
         </Paragraph>
       </div>
 
-      <div class="relative w-15 h-4 bg-gray-custom-dark border-y-2 border-[#888]">
-        <div :class="panelClasses" class="bottom-4 left-5 flex items-center justify-center"><Paragraph class="rotate-90">{{ isOpen ? $t('nav.about') : '' }}</Paragraph></div>
-        <div :class="panelClasses" class="top-4 left-5 flex items-center justify-center"><Paragraph class="rotate-90">{{ isOpen ? $t('nav.contact') : '' }}</Paragraph></div>
+      <div class="relative w-15 h-4 bg-gray-custom-darker border-y-2 border-[#888]">
+        <NuxtLink to="/about">
+          <div :class="panelClasses" class="bottom-4 left-5 flex items-center justify-center">
+            <Paragraph class="rotate-90">
+              {{ isOpen ? $t('nav.about') : '' }}
+            </Paragraph>
+          </div>
+        </NuxtLink>
+        <div :class="panelClasses" class="top-4 left-5 flex items-center justify-center">
+          <Paragraph class="rotate-90">
+            {{ isOpen ? $t('nav.contact') : '' }}
+          </Paragraph>
+        </div>
       </div>
 
     </div>
@@ -26,19 +36,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import type { Ref } from 'vue';
 import Paragraph from '../typographie/Paragraph.vue';
+import { useRoryStore } from '~/stores/roryStore';
 
-const isOpen: Ref<boolean> = ref(false);
+const roryStore = useRoryStore();
 
-const buttonText: Ref<string> = ref('Click Me');
+const isOpen: Ref<boolean> = computed(() => roryStore.isNavOpen);
 
 const togglePanels = (): void => {
-  isOpen.value = !isOpen.value;
-  if (buttonText.value === 'Click Me') {
-    buttonText.value = 'ISS';
-  }
+  roryStore.onToggleNav();
 };
 
 const panelClasses = computed(() => [

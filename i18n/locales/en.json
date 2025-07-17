@@ -8,5 +8,10 @@
   "satellite": {
     "closed": "Off",
     "open": "On"
-  }
+  },
+  "socials": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Email"
+  },
 }
