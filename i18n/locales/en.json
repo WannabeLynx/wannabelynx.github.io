@@ -14,4 +14,7 @@
     "linkedin": "LinkedIn",
     "email": "Email"
   },
+  "observatory": {
+    "bubble": "Click me"
+  }
 }

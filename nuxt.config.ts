@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/i18n',
     '@pinia/nuxt',
+    'nuxt-svgo',
   ],
   i18n: {
     strategy: 'prefix_except_default',
@@ -28,8 +29,11 @@ export default defineNuxtConfig({
     ],
   },
   nitro: {
-  devProxy: {
-    host: 'localhost',
+    devProxy: {
+      host: 'localhost',
+    },
   },
-},
+  svgo: {
+    autoImportPath: '../assets/icons/',
+  },
 });

@@ -31,7 +31,7 @@
           before:border-t-[10px] before:border-t-gray-custom-light
           before:bottom-[-9px] before:left-1/2 before:-translate-x-1/2"
       >
-        <Paragraph weight="bold" color="text-black">{{ $t('Click me') }}</Paragraph>
+        <Paragraph weight="bold" color="text-black">{{ $t('observatory.bubble') }}</Paragraph>
       </div>
       <div id="topWall" class="w-70 h-5 border-2 absolute bottom-35 rounded-sm bg-gray-custom-dark"></div>
       <div id="dome" class="w-68 h-30 border-2 border-b-0 absolute bottom-40 left-1 rounded-t-full bg-white"></div>

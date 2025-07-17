@@ -8,5 +8,13 @@
   "satellite": {
     "closed": "Aus",
     "open": "An"
+  },
+  "socials": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Email"
+  },
+  "observatory": {
+    "bubble": "Klicke mich"
   }
 }
