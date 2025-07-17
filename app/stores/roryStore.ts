@@ -5,7 +5,8 @@ export const useRoryStore = defineStore('roryStore', {
     isNavOpen: false,
     isDomOpen: false,
     isScreenOpen: false,
-    screenType: ''
+    screenType: '',
+    isHoveringObject: false,
   }),
   actions: {
     onToggleNav() {
@@ -25,6 +26,9 @@ export const useRoryStore = defineStore('roryStore', {
     onCloseScreen() {
       this.isScreenOpen = false;
       this.screenType = '';
+    },
+    setHoveringObject(hovering: boolean) {
+      this.isHoveringObject = hovering;
     }
   }
 });

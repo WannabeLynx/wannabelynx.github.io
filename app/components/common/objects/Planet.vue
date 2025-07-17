@@ -7,7 +7,13 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div v-if="isDomOpen" @click="onPlanetInfo" class="absolute flex items-center justify-center">
+    <div
+      v-if="isDomOpen"
+      @click="onPlanetInfo"
+      class="absolute flex items-center justify-center"
+      @mouseenter="roryStore.setHoveringObject(true)"
+      @mouseleave="roryStore.setHoveringObject(false)"
+    >
       <div class="relative cursor-pointer transition-all duration-1000 hover:scale-95 hover:rotate-5 hover:drop-shadow-lg">
         <div class="absolute w-[212px] h-[212px] rounded-full border-4 border-indigo-900 bg-[linear-gradient(0deg,#4f46e5_0%,#a855f7_100%)]">
           <div class="absolute top-[30px] left-[80px] w-[50px] h-[12px] rounded-lg bg-fuchsia-800/80">

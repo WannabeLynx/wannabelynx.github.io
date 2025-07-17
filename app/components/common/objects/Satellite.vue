@@ -1,5 +1,9 @@
 <template>
-  <div class="duration-500 hover:scale-95">
+  <div
+    class="duration-500 hover:scale-95"
+    @mouseenter="roryStore.setHoveringObject(true)"
+    @mouseleave="roryStore.setHoveringObject(false)"
+  >
     <div class="flex items-center -rotate-33">
       <div class="relative w-15 h-4 bg-gray-custom-darker border-y-2 border-[#888]">
         <div :class="panelClasses" class="bottom-4 right-5 flex items-center justify-center">

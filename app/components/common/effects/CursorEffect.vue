@@ -1,13 +1,13 @@
 <template>
   <div class="pointer-events-none fixed inset-0 z-[9999]">
-
     <div
       v-if="showRocket"
       class="rocket"
       :style="{
         top: `${rocketPos.y}px`,
         left: `${rocketPos.x}px`,
-        transform: `translate(-50%, -50%) rotate(${currentAngle}deg)`
+        transform: `translate(-50%, -50%) rotate(${currentAngle}deg) scale(${rocketScale})`,
+        opacity: rocketOpacity
       }"
     >
       <SvgoRocket class="stroke-white text-xl" />
@@ -26,7 +26,7 @@
           top: `${p.y}px`,
           left: `${p.x}px`,
           transform: `scale(${p.scale})`,
-          opacity: p.opacity,
+          opacity: p.opacity * exhaustOpacityMultiplier,
           background: p.color
         }"
       ></div>
@@ -36,6 +36,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
+import { useRoryStore } from '~/stores/roryStore';
+import Paragraph from '../typographie/Paragraph.vue';
 
 interface ExhaustParticle {
   id: number;
@@ -47,6 +49,8 @@ interface ExhaustParticle {
   velocityX: number;
   velocityY: number;
 }
+
+const roryStore = useRoryStore();
 
 const exhaustParticles = ref<ExhaustParticle[]>([]);
 let particleId = 0;
@@ -61,6 +65,11 @@ const currentAngle = ref(0);
 
 let animationFrameId: number;
 let mouseMovementTimeout: number;
+
+// No effect when on Object
+const rocketScale = computed(() => roryStore.isHoveringObject ? 0 : 1);
+const rocketOpacity = computed(() => roryStore.isHoveringObject ? 0 : 1);
+const exhaustOpacityMultiplier = computed(() => roryStore.isHoveringObject ? 0 : 1);
 
 const updateMousePosition = (event: MouseEvent) => {
   previousMousePos.value = { ...lastMousePos.value };
@@ -171,8 +180,9 @@ onUnmounted(() => {
 <style scoped>
 .rocket {
   position: absolute;
-  will-change: transform;
+  will-change: transform, opacity;
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
 .exhaust-particle {

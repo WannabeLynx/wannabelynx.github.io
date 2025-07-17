@@ -7,7 +7,13 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div v-if="isDomOpen" @click="onNebulaInfo" class="absolute inset-0 flex items-center justify-center w-full h-full duration-1000 hover:cursor-pointer hover:-rotate-3 hover:scale-[1.1]">
+    <div
+      v-if="isDomOpen"
+      @click="onNebulaInfo"
+      class="absolute inset-0 flex items-center justify-center w-full h-full duration-1000 hover:cursor-pointer hover:-rotate-3 hover:scale-[1.1]"
+      @mouseenter="roryStore.setHoveringObject(true)"
+      @mouseleave="roryStore.setHoveringObject(false)"
+    >
       <div class="relative w-96 h-96">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-[0_0_20px_10px_rgba(255,255,255,0.8)] z-50"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-cyan-200/50 rounded-full filter blur-2xl animate-pulse z-40"></div>
