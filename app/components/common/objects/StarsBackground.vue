@@ -8,6 +8,7 @@
     leave-to-class="opacity-0"
   >
     <div v-if="isDomOpen" class="relative h-full w-full overflow-hidden bg-black">
+      <!-- Static Stars -->
       <div
         class="absolute top-0 left-0 h-px w-px bg-transparent"
         :style="{
@@ -26,16 +27,103 @@
           boxShadow: '18vw 58vh #FFF, 78vw 88vh #FFF, 38vw 18vh #FFF, 88vw 48vh #FFF, 28vw 78vh #FFF, 68vw 8vh #FFF, 48vw 38vh #FFF, 98vw 68vh #FFF'
         }"
       ></div>
+
+      <!-- ✨ Shooting Stars Container ✨ -->
+      <ShootingStar
+        v-for="star in shootingStars"
+        :key="star.id"
+        :start-x="star.startX"
+        :start-y="star.startY"
+        :end-x="star.endX"
+        :end-y="star.endY"
+        :duration="star.duration"
+        :delay="star.delay"
+      />
     </div>
   </Transition>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useRoryStore } from '~/stores/roryStore';
-import { computed } from 'vue';
+import ShootingStar from '../effects/ShootingStar.vue';
+
+interface ShootingStarData {
+  id: number;
+  startX: string;
+  startY: string;
+  endX: string;
+  endY: string;
+  duration: string;
+  delay: string;
+}
 
 const roryStore = useRoryStore();
 const isDomOpen = computed(() => roryStore.isDomOpen);
+
+const shootingStars = ref<ShootingStarData[]>([]);
+let intervalId: number;
+
+const createShootingStar = () => {
+  const id = Date.now();
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+
+  // Create curved trajectory
+  const startFromTop = Math.random() > 0.5;
+  const goesRight = Math.random() > 0.5;
+
+  let startX: number, startY: number, endX: number, endY: number;
+
+  if (startFromTop) {
+    startY = -50;
+    startX = Math.random() * screenWidth;
+    if (goesRight) {
+      endX = startX + (screenWidth * 0.3) + (Math.random() * screenWidth * 0.4);
+      endY = screenHeight * 0.6 + (Math.random() * screenHeight * 0.2);
+    } else {
+      endX = startX - (screenWidth * 0.3) - (Math.random() * screenWidth * 0.4);
+      endY = screenHeight * 0.6 + (Math.random() * screenHeight * 0.2);
+    }
+  } else {
+    if (goesRight) {
+      startX = -50;
+      startY = Math.random() * screenHeight * 0.7;
+      endX = screenWidth * 0.6 + (Math.random() * screenWidth * 0.4);
+      endY = startY + (screenHeight * 0.2) + (Math.random() * screenHeight * 0.3);
+    } else {
+      startX = screenWidth + 50;
+      startY = Math.random() * screenHeight * 0.7;
+      endX = screenWidth * 0.4 - (Math.random() * screenWidth * 0.4);
+      endY = startY + (screenHeight * 0.2) + (Math.random() * screenHeight * 0.3);
+    }
+  }
+
+  const newStar: ShootingStarData = {
+    id,
+    startX: `${startX}px`,
+    startY: `${startY}px`,
+    endX: `${endX}px`,
+    endY: `${endY}px`,
+    duration: `${1.5 + Math.random() * 2}s`,
+    delay: `${Math.random() * 3}s`
+  };
+
+  shootingStars.value.push(newStar);
+
+  const totalAnimationTime = (parseFloat(newStar.duration) + parseFloat(newStar.delay)) * 1000;
+  setTimeout(() => {
+    shootingStars.value = shootingStars.value.filter(s => s.id !== id);
+  }, totalAnimationTime);
+};
+
+onMounted(() => {
+  intervalId = window.setInterval(createShootingStar, 4000);
+});
+
+onUnmounted(() => {
+  clearInterval(intervalId);
+});
 </script>
 
 <style scoped>

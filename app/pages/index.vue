@@ -1,5 +1,6 @@
 <template>
   <div class="relative w-screen min-h-screen bg-black/95 lg:h-screen lg:overflow-hidden items-center justify-center flex flex-col" :class="{ 'overflow-hidden h-screen': !isDomOpen }">
+    <CursorEffect v-if="!isTouchDevice" />
     <div v-if="isDomOpen && !isScreenOpen" class="lg:hidden fixed top-2 right-2 z-1">
       <ScrollIndicator />
     </div>
@@ -76,8 +77,14 @@ import Screen from '~/components/common/objects/Screen.vue';
 import { useRoryStore } from '~/stores/roryStore';
 import { computed } from 'vue';
 import ScrollIndicator from '~/components/common/objects/ScrollIndicator.vue';
+import CursorEffect from '~/components/common/effects/CursorEffect.vue';
 
 const roryStore = useRoryStore();
 const isDomOpen: Ref<boolean> = computed(() => roryStore.isDomOpen);
 const isScreenOpen: Ref<boolean> = computed(() => roryStore.isScreenOpen);
+
+const isTouchDevice = ref(false);
+onMounted(() => {
+  isTouchDevice.value = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+});
 </script>
