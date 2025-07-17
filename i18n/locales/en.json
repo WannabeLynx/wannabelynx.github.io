@@ -4,5 +4,9 @@
     "about": "About",
     "projects": "Projects",
     "contact": "Contact"
+  },
+  "satellite": {
+    "closed": "Off",
+    "open": "On"
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <div class="bg-black h-full w-full items-center justify-center flex">
+    <Satellite />
     <div class="relative flex items-end h-full">
       <div id="leftBottom" class="w-30 h-5 border-2 border-r-0 border-black rounded-tl-sm bg-white"></div>
       <div id="door" @click="toggleDome" class="w-10 border-2 border-black h-15 rounded-t-full z-10 cursor-pointer bg-gray-200"></div>
@@ -45,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+import Satellite from '~/components/common/objects/Satellite.vue';
 import { ref } from 'vue';
 
 const isOpen = ref(false);

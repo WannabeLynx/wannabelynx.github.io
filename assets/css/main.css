@@ -6,4 +6,8 @@
 @theme {
   --font-manrope: 'Manrope', sans-serif;
   --font-lora: 'Lora', serif;
+
+  --color-gray-custom-dark: #b0b0b5;
+  --color-gray-custom-light: #a0a0a5;
+  --color-gray-custom-lighter: #d0d0d5;
 }
