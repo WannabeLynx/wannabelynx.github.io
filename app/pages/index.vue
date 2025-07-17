@@ -1,5 +1,8 @@
 <template>
-  <div class="relative w-screen min-h-[screen] bg-black/95 lg:h-screen lg:overflow-hidden items-center justify-center flex flex-col">
+  <div class="relative w-screen min-h-screen bg-black/95 lg:h-screen lg:overflow-hidden items-center justify-center flex flex-col" :class="{ 'overflow-hidden h-screen': !isDomOpen }">
+    <div v-if="isDomOpen && !isScreenOpen" class="lg:hidden absolute top-2 right-2 z-1">
+      <ScrollIndicator />
+    </div>
     <div class="fixed inset-0 z-0">
       <StarsBackground />
     </div>
@@ -17,7 +20,7 @@
       <div
         class="
           scale-[0.8] mt-70 mr-auto flex
-          lg:absolute lg:top-[10%] lg:left-[35%] lg:mt-0 lg:mr-0
+          lg:absolute lg:top-[30%] lg:left-[35%] lg:mt-0 lg:mr-0
         "
       >
         <Planet />
@@ -25,7 +28,7 @@
 
       <div
         class="
-          transition-transform duration-[1500ms] ease-in-out mt-50 mb-80
+          transition-transform duration-[1500ms] ease-in-out mt-70 mb-100
           lg:absolute lg:left-[10%] lg:bottom-[20%] lg:my-0
         "
         :class="{
@@ -36,10 +39,19 @@
         <Satellite />
       </div>
     </div>
+
     <div
       class="
-        fixed -bottom-5
-        lg:absolute lg:scale-100 lg:left-auto lg:translate-x-0 lg:bottom-0
+        fixed bottom-0 left-0 z-10 h-[70%] w-full
+        bg-gradient-to-t from-black/95 to-transparent
+        pointer-events-none lg:hidden
+      "
+    ></div>
+
+    <div
+      class="
+        fixed -bottom-5 z-20
+        lg:absolute lg:scale-100 lg:left-auto lg:translate-x-0 lg:bottom-0 lg:z-auto
       "
     >
       <Observatory />
@@ -62,7 +74,8 @@ import Nebula from '~/components/common/objects/Nebula.vue';
 import Planet from '~/components/common/objects/Planet.vue';
 import Screen from '~/components/common/objects/Screen.vue';
 import { useRoryStore } from '~/stores/roryStore';
-import { computed, Ref } from 'vue';
+import { computed } from 'vue';
+import ScrollIndicator from '~/components/common/objects/ScrollIndicator.vue';
 
 const roryStore = useRoryStore();
 const isDomOpen: Ref<boolean> = computed(() => roryStore.isDomOpen);
