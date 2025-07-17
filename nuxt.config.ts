@@ -24,4 +24,9 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  nitro: {
+  devProxy: {
+    host: 'localhost',
+  },
+},
 });
