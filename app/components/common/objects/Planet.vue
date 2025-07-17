@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute inset-0 flex items-center justify-center">
+  <div @click="onPlanetInfo" class="absolute inset-0 flex items-center justify-center">
     <div class="relative w-[400px] h-[300px] scale-90 cursor-pointer transition-all duration-1000 hover:scale-95 hover:rotate-5 hover:drop-shadow-lg">
       <div class="absolute top-[45px] left-[90px] w-[212px] h-[212px] rounded-full border-4 border-indigo-900 bg-[linear-gradient(0deg,#4f46e5_0%,#a855f7_100%)]">
         <div class="absolute top-[30px] left-[80px] w-[50px] h-[12px] rounded-lg bg-fuchsia-800/80">
@@ -29,3 +29,13 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useRoryStore } from '~/stores/roryStore';
+
+const roryStore = useRoryStore();
+
+const onPlanetInfo = (): void => {
+  roryStore.onOpenScreen('planetInfo');
+};
+</script>

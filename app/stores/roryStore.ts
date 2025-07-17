@@ -4,6 +4,8 @@ export const useRoryStore = defineStore('roryStore', {
   state: () => ({
     isNavOpen: false,
     isDomOpen: false,
+    isScreenOpen: false,
+    screenType: ''
   }),
   actions: {
     onToggleNav() {
@@ -11,6 +13,14 @@ export const useRoryStore = defineStore('roryStore', {
     },
     onToggleDom() {
       this.isDomOpen = !this.isDomOpen;
+    },
+    onOpenScreen(screenType: string) {
+      this.isScreenOpen = true;
+      this.screenType = screenType;
+    },
+    onCloseScreen() {
+      this.isScreenOpen = false;
+      this.screenType = '';
     }
   }
 });

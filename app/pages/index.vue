@@ -44,6 +44,12 @@
         <Planet />
       </div>
     </Transition>
+    <div
+      class="absolute bottom-2 right-2 transition-transform duration-[1500ms] ease-in-out"
+      :class="{ '-translate-y-[150vw]': !isScreenOpen, 'translate-y-0': isScreenOpen }"
+    >
+      <Screen />
+    </div>
   </div>
 </template>
 
@@ -53,8 +59,10 @@ import Observatory from '~/components/common/objects/Observatory.vue';
 import StarsBackground from '~/components/common/objects/StarsBackground.vue';
 import Nebula from '~/components/common/objects/Nebula.vue';
 import Planet from '~/components/common/objects/Planet.vue';
+import Screen from '~/components/common/objects/Screen.vue';
 import { useRoryStore } from '~/stores/roryStore';
 
 const roryStore = useRoryStore();
 const isDomOpen: Ref<boolean> = computed(() => roryStore.isDomOpen);
+const isScreenOpen: Ref<boolean> = computed(() => roryStore.isScreenOpen);
 </script>
