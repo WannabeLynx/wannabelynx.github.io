@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-screen min-h-screen bg-black/95 lg:h-screen lg:overflow-hidden items-center justify-center flex flex-col" :class="{ 'overflow-hidden h-screen': !isDomOpen }">
-    <div v-if="isDomOpen && !isScreenOpen" class="lg:hidden absolute top-2 right-2 z-1">
+    <div v-if="isDomOpen && !isScreenOpen" class="lg:hidden fixed top-2 right-2 z-1">
       <ScrollIndicator />
     </div>
     <div class="fixed inset-0 z-0">
