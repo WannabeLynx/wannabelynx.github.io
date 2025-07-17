@@ -1,5 +1,9 @@
 <template>
-  <div class="w-full h-full p-4 relative border border-transparent hover:bg-gray-600 bg-gray-700 rounded-lg shadow shadow-gray-500 hover:border-white lg:w-140 lg:h-80">
+  <div
+    class="w-full h-full p-4 relative border border-transparent hover:bg-gray-600 bg-gray-700 rounded-lg shadow shadow-gray-500 hover:border-white lg:w-140 lg:h-80"
+    @mouseenter="roryStore.setHoveringObject(true)"
+    @mouseleave="roryStore.setHoveringObject(false)"
+  >
     <div class="h-8 w-8 flex items-center justify-center rounded-full absolute z-2 bg-gray-700 shadow shadow-black -top-2 -right-2 p-1">
       <div
         class="bg-red-500 z-1 rounded-full cursor-pointer h-full w-full flex items-center justify-center transition-all duration-300 group hover:shadow-inner hover:shadow-black/70"

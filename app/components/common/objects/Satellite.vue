@@ -29,13 +29,11 @@
       </div>
 
       <div class="relative w-15 h-4 bg-gray-custom-darker border-y-2 border-[#888]">
-        <NuxtLink to="/about">
-          <div :class="panelClasses" class="bottom-4 left-5 flex items-center justify-center">
-            <a href="https://www.instagram.com/wannabelynx" target="_blank" rel="noopener noreferrer">
+        <div :class="panelClasses" class="bottom-4 left-5 flex items-center justify-center">
+          <a href="https://www.instagram.com/wannabelynx" target="_blank" rel="noopener noreferrer">
             <SvgoInstagram class="text-3xl stroke-white" />
           </a>
-          </div>
-        </NuxtLink>
+        </div>
         <div :class="panelClasses" class="top-4 left-5 flex items-center justify-center">
           <a href="https://steamcommunity.com/id/wannabelynx" target="_blank" rel="noopener noreferrer">
             <SvgoSteam class="text-3xl stroke-white" />
