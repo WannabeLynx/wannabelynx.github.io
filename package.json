@@ -15,6 +15,7 @@
     "nuxt": "^4.0.0",
     "nuxt-svgo": "^4.2.4",
     "pinia-plugin-persistedstate": "^4.2.0",
+    "rory-components": "^0.1.5",
     "tailwindcss": "^4.1.11",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1"
