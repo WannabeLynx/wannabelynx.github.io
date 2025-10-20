@@ -41,7 +41,52 @@
 import { h } from 'vue';
 import { GlowDivider, Badge } from 'rory-components';
 
-// --- Local Icon Components (Vue version of Lucide icons) ---
+const title = 'My Toolkit';
+const techCategories = [
+  {
+    category: "Frontend",
+    colorClass: "text-primary border-primary/25",
+    iconColorClass: "text-primary",
+    iconBgColorClass: "bg-primary/20",
+    iconBorderColorClass: "border-primary/25",
+    technologies: [
+      { name: "Vue.js", iconName: 'component' },
+      { name: "Nuxt", iconName: 'layers' },
+      { name: "TypeScript", iconName: 'fileCode' },
+      { name: "Tailwind CSS", iconName: 'palette' },
+      { name: "Pinia", iconName: 'database' },
+      { name: "Vite", iconName: 'zap' }
+    ]
+  },
+  {
+    category: "Tooling",
+    colorClass: "text-secondary border-secondary/25",
+    iconColorClass: "text-secondary",
+    iconBgColorClass: "bg-secondary/20",
+    iconBorderColorClass: "border-secondary/25",
+    technologies: [
+      { name: "Git", iconName: 'gitBranch' },
+      { name: "npm/pnpm", iconName: 'box' },
+      { name: "ESLint", iconName: 'code2' },
+      { name: "Vitest", iconName: 'braces' },
+      { name: "Docker", iconName: 'box' },
+      { name: "CI/CD", iconName: 'terminal' }
+    ]
+  },
+  {
+    category: "Design",
+    colorClass: "text-accent border-accent/25",
+    iconColorClass: "text-accent",
+    iconBgColorClass: "bg-accent/20",
+    iconBorderColorClass: "border-accent/25",
+    technologies: [
+      { name: "Figma", iconName: 'figma' },
+      { name: "Adobe XD", iconName: 'palette' },
+      { name: "Sketch", iconName: 'layers' },
+      { name: "Design Systems", iconName: 'component' }
+    ]
+  }
+];
 
 const BracesIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '24', height: '24', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, [h('path', { d: 'M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1' }), h('path', { d: 'M16 21h1a2 2 0 0 0 2-2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1' })]);
 const BoxIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '24', height: '24', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, [h('path', { d: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' }), h('polyline', { points: '3.27 6.96 12 12.01 20.73 6.96' }), h('line', { x1: '12', x2: '12', y1: '22.08', y2: '12' })]);
@@ -61,74 +106,4 @@ const iconMap: Record<string, ReturnType<typeof h>> = {
 };
 
 const getIconComponent = (name: string) => iconMap[name] || null;
-
-// --- Props ---
-
-interface Technology {
-  name: string;
-  iconName: string;
-}
-
-interface TechCategory {
-  category: string;
-  colorClass: string;
-  iconColorClass: string;
-  iconBgColorClass: string;
-  iconBorderColorClass: string;
-  technologies: Technology[];
-}
-
-interface Props {
-  title?: string;
-  techCategories?: TechCategory[];
-}
-
-withDefaults(defineProps<Props>(), {
-  title: 'My Toolkit',
-  techCategories: () => [
-    {
-      category: "Frontend",
-      colorClass: "text-primary border-primary/25",
-      iconColorClass: "text-primary",
-      iconBgColorClass: "bg-primary/20",
-      iconBorderColorClass: "border-primary/25",
-      technologies: [
-        { name: "Vue.js", iconName: 'component' },
-        { name: "Nuxt", iconName: 'layers' },
-        { name: "TypeScript", iconName: 'fileCode' },
-        { name: "Tailwind CSS", iconName: 'palette' },
-        { name: "Pinia", iconName: 'database' },
-        { name: "Vite", iconName: 'zap' }
-      ]
-    },
-    {
-      category: "Tooling",
-      colorClass: "text-secondary border-secondary/25",
-      iconColorClass: "text-secondary",
-      iconBgColorClass: "bg-secondary/20",
-      iconBorderColorClass: "border-secondary/25",
-      technologies: [
-        { name: "Git", iconName: 'gitBranch' },
-        { name: "npm/pnpm", iconName: 'box' },
-        { name: "ESLint", iconName: 'code2' },
-        { name: "Vitest", iconName: 'braces' },
-        { name: "Docker", iconName: 'box' },
-        { name: "CI/CD", iconName: 'terminal' }
-      ]
-    },
-    {
-      category: "Design",
-      colorClass: "text-accent border-accent/25",
-      iconColorClass: "text-accent",
-      iconBgColorClass: "bg-accent/20",
-      iconBorderColorClass: "border-accent/25",
-      technologies: [
-        { name: "Figma", iconName: 'figma' },
-        { name: "Adobe XD", iconName: 'palette' },
-        { name: "Sketch", iconName: 'layers' },
-        { name: "Design Systems", iconName: 'component' }
-      ]
-    }
-  ],
-});
 </script>

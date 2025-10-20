@@ -58,25 +58,16 @@
 import { computed } from 'vue';
 import { Button, ScrollIndicator } from 'rory-components';
 
-interface Props {
-  greeting?: string;
-  name?: string;
-  tagline?: string;
-  description?: string;
-  buttonText?: string;
-  backgroundImageUrl?: string;
-}
+const greeting = 'Hi, my name is';
+const name = 'Nino Bär';
+const tagline = 'I build things for the web.';
+const description = 'Frontend Developer specializing in <span class="text-primary">Nuxt</span>, <span class="text-primary">Vue</span>, and <span class="text-primary">TypeScript</span>. Creating elegant, performant web experiences inspired by the cosmos.';
+const buttonText = 'View My Work';
+const backgroundImageUrl = 'https://images.unsplash.com/photo-1642635715930-b3a1eba9c99f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZWJ1bGElMjBzcGFjZSUyMHN0YXJzfGVufDF8fHx8MTc2MDcwMDY3MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral';
 
-const props = withDefaults(defineProps<Props>(), {
-  greeting: 'Hi, my name is',
-  name: 'Nino Bär',
-  tagline: 'I build things for the web.',
-  description: 'Frontend Developer specializing in <span class="text-primary">Nuxt</span>, <span class="text-primary">Vue</span>, and <span class="text-primary">TypeScript</span>. Creating elegant, performant web experiences inspired by the cosmos.',
-  buttonText: 'View My Work',
-  backgroundImageUrl: 'https://images.unsplash.com/photo-1642635715930-b3a1eba9c99f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZWJ1bGElMjBzcGFjZSUyMHN0YXJzfGVufDF8fHx8MTc2MDcwMDY3MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-});
-
-const emit = defineEmits(['button-click']);
+const scrollToProjects = () => {
+  document.getElementById("Projects")?.scrollIntoView({ behavior: "smooth" });
+};
 
 // Generate styles for 50 stars
 const stars = computed(() => {
@@ -89,8 +80,4 @@ const stars = computed(() => {
     },
   }));
 });
-
-const scrollToProjects = () => {
-  document.getElementById("Projects")?.scrollIntoView({ behavior: "smooth" });
-};
 </script>

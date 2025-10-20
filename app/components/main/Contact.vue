@@ -138,19 +138,4 @@ const handleSubmit = () => {
   formData.value = { name: "", email: "", message: "" };
 };
 
-// --- Props ---
-interface SocialLink {
-  name: string;
-  iconName: 'github' | 'linkedin' | 'mail';
-  url: string;
-}
-
-interface Props {
-  title?: string;
-  subtitle?: string;
-  socialLinks?: SocialLink[];
-  availabilityTitle?: string;
-  availabilityText?: string;
-  footerName?: string;
-}
 </script>
