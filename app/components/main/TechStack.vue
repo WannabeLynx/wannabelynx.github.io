@@ -7,7 +7,7 @@
         {{ title }}
       </h2>
 
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 gap-20 place-items-center">
         <div v-for="(category, categoryIndex) in techCategories" :key="categoryIndex" class="space-y-6">
           <h3
             class="text-2xl text-center pb-3 border-b-2 transition-all duration-300"
@@ -16,7 +16,7 @@
             {{ category.category }}
           </h3>
 
-          <div class="space-y-3">
+          <div class="gap-4 grid grid-cols-2">
             <Badge
               v-for="(tech, techIndex) in category.technologies"
               :key="techIndex"
@@ -73,19 +73,6 @@ const techCategories = [
       { name: "CI/CD", iconName: 'terminal' }
     ]
   },
-  {
-    category: "Design",
-    colorClass: "text-accent border-accent/25",
-    iconColorClass: "text-accent",
-    iconBgColorClass: "bg-accent/20",
-    iconBorderColorClass: "border-accent/25",
-    technologies: [
-      { name: "Figma", iconName: 'figma' },
-      { name: "Adobe XD", iconName: 'palette' },
-      { name: "Sketch", iconName: 'layers' },
-      { name: "Design Systems", iconName: 'component' }
-    ]
-  }
 ];
 
 const BracesIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '24', height: '24', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, [h('path', { d: 'M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1' }), h('path', { d: 'M16 21h1a2 2 0 0 0 2-2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1' })]);

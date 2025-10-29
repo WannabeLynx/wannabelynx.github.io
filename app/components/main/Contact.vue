@@ -1,5 +1,5 @@
 <template>
-  <section class="relative py-24 px-6 md:px-12">
+  <section class="relative pt-24 pb-5 px-6 md:px-12">
     <GlowDivider color="primary" />
 
     <div class="max-w-4xl mx-auto">
@@ -76,15 +76,11 @@
         </div>
       </div>
 
-      <div class="mt-24 text-center">
-        <div class="inline-flex items-center gap-2 text-foreground/50">
-          <span>Built with</span>
-          <span class="text-secondary">♥</span>
-          <span>by {{ footerName }}</span>
-        </div>
-        <p class="mt-2 text-foreground/40">
-          © {{ new Date().getFullYear() }} All rights reserved.
-        </p>
+      <div class="mt-24 text-center w-full text-foreground opacity-40">
+        <p>Built with Nuxt V4 & Tailwind V4</p>
+        <p>Background Image Credit: NASA, ESA, CSA, and M. Zamani (ESA)</p>
+        <p>© {{ new Date().getFullYear() }} All rights reserved.</p>
+
       </div>
     </div>
   </section>
@@ -108,8 +104,8 @@ const LinkedinIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width
 ]);
 
 const MailIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '24', height: '24', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'w-6 h-6 text-accent' }, [
-  h('path', { d: 'm22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7' }),
-  h('rect', { x: '2', y: '4', width: '20', height: '16', rx: '2' }),
+   h('path', { d: 'm22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7' }),
+   h('rect', { x: '2', y: '4', width: '20', height: '16', rx: '2' }),
 ]);
 
 const socialLinks = [
@@ -119,10 +115,9 @@ const socialLinks = [
 ];
 
 const title = 'Get In Touch';
-const subtitle = "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out!";
-const availabilityTitle = '-'
-const availabilityText = "Let's create something amazing together!";
-const footerName = 'Nino Bär';
+const subtitle = "Contact does not work yet :) But the links do!";
+const availabilityTitle = 'ขอบคุณที่เข้ามาเยี่ยมชมเว็บไซต์ของผม'
+const availabilityText = "Thank you for visiting my website";
 
 // --- Form State ---
 const formData = ref({
@@ -133,8 +128,7 @@ const formData = ref({
 
 const handleSubmit = () => {
   console.log("Form submitted:", formData.value);
-  alert("Thanks for reaching out! This is a demo form and does not send emails.");
-  // Reset form
+  alert("");
   formData.value = { name: "", email: "", message: "" };
 };
 
