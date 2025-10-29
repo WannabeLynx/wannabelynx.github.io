@@ -22,7 +22,7 @@
               :icon-color-class="value.colorClass"
             >
               <template #icon>
-                <component class="w-6" :is="getIconComponent(value.iconName)" />
+                <component class="w-6" :is="value.iconName" />
               </template>
             </Badge>
           </div>
@@ -48,26 +48,14 @@ const bio = [
 ]
 
 const values = [
-  { iconName: 'code', label: 'Coding', colorClass: 'text-primary' },
-  { iconName: 'planet', label: 'Astronomy', colorClass: 'text-secondary' },
-  { iconName: 'pc', label: 'Gaming', colorClass: 'text-accent' },
-  { iconName: 'paperPlane', label: 'Traveling', colorClass: 'text-primary' },
+  { iconName: CodeBracketIcon, label: 'Coding', colorClass: 'text-primary' },
+  { iconName: GlobeAsiaAustraliaIcon, label: 'Astronomy', colorClass: 'text-secondary' },
+  { iconName: ComputerDesktopIcon, label: 'Gaming', colorClass: 'text-accent' },
+  { iconName: PaperAirplaneIcon, label: 'Traveling', colorClass: 'text-primary' },
 ]
 
 const image = {
   url: Me,
   alt: 'Me and my Telescope'
 }
-
-const iconMap = {
-  code: CodeBracketIcon,
-  planet: GlobeAsiaAustraliaIcon,
-  pc: ComputerDesktopIcon,
-  paperPlane: PaperAirplaneIcon,
-};
-
-const getIconComponent = (name: string) => {
-  return iconMap[name] || null;
-};
-
 </script>
