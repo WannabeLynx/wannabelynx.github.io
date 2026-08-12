@@ -55,7 +55,6 @@
 
       <footer class="mt-20 pt-8 border-t border-[color:var(--border)] text-center">
         <p class="font-mono text-[.64rem] tracking-[.1em] uppercase text-foreground/35 leading-[2]">Built with Nuxt V4 &amp; Tailwind V4</p>
-        <p class="font-mono text-[.64rem] tracking-[.1em] uppercase text-foreground/35 leading-[2]">Background image credit: NASA, ESA, CSA, and M. Zamani (ESA)</p>
         <p class="font-mono text-[.64rem] tracking-[.1em] uppercase text-foreground/35 leading-[2]"><span class="text-primary">✦</span> © {{ year }} Nino Bär — All rights reserved</p>
       </footer>
     </div>

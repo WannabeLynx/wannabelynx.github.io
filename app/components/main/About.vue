@@ -43,7 +43,7 @@ import Me from '../../assets/images/Me.jpg';
 import { GlobeAsiaAustraliaIcon, CodeBracketIcon, PaperAirplaneIcon, ComputerDesktopIcon } from '@heroicons/vue/24/outline';
 
 const bio = [
-  "Hello, I'm Nino — a Software Developer with 8 years of experience at cobra computer's brainware GmbH, a leading CRM software company.",
+  "Hello, I'm Nino — a Software Developer with 8 years of experience at cobra GmbH, a leading CRM software company.",
   "I began as an apprentice, building a strong foundation in backend development with C# and .NET. Today I'm a Frontend Developer building modern, dynamic web applications using Nuxt.js (Vue), TypeScript, and Tailwind CSS.",
   "When I'm not coding, you'll find me stargazing, reading about astrophysics, or playing GeoGuessr.",
 ];

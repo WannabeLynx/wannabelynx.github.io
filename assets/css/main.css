@@ -12,6 +12,18 @@
 
 html { scroll-behavior: smooth; }
 
+/* hide the browser scrollbar while keeping the page scrollable */
+html {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE / old Edge */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;                /* Chrome / Safari / Edge */
+}
+
 /* scroll-reveal */
 .reveal {
   opacity: 0;

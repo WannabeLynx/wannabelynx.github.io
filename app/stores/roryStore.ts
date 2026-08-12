@@ -7,8 +7,12 @@ export const useRoryStore = defineStore('roryStore', {
     isScreenOpen: false,
     screenType: '',
     isHoveringObject: false,
+    loadingSite: true,
   }),
   actions: {
+    setSiteLoaded() {
+      this.loadingSite = false;
+    },
     onToggleNav() {
       this.isNavOpen = !this.isNavOpen;
     },
