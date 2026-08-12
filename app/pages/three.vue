@@ -14,10 +14,18 @@
         Built with <span class="text-[#64FFDA]">three.js</span>
       </h1>
       <p class="mt-2 text-sm text-white/50">Move your cursor — the camera follows.</p>
+      <p class="mt-2 text-sm text-white/50">Work in progress.</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import ThreeShowcase from '~/components/three/ThreeShowcase.vue';
+
+useSeoMeta({
+  title: 'Nino Bär — Frontend Developer · 3D',
+  ogTitle: 'Nino Bär · 3D',
+  ogUrl: 'https://wannabelynx.github.io/three',
+});
+useHead({ link: [{ rel: 'canonical', href: 'https://wannabelynx.github.io/three' }] });
 </script>

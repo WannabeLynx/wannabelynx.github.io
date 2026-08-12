@@ -1,90 +1,84 @@
 <template>
-  <div class="relative w-screen min-h-screen bg-black/95 lg:h-screen lg:overflow-hidden items-center justify-center flex flex-col" :class="{ 'overflow-hidden h-screen': !isDomOpen }">
+  <div class="space-hud" :class="{ booted: isDomOpen, 'is-touch': isTouchDevice }">
+    <StarsBackground />
     <CursorEffect v-if="!isTouchDevice" />
-    <div v-if="isDomOpen && !isScreenOpen" class="lg:hidden fixed top-2 right-2 z-1">
-      <ScrollIndicator />
-    </div>
-    <div class="fixed inset-0 z-0">
-      <StarsBackground />
+
+    <!-- HUD frame -->
+    <div class="hud">
+      <span class="bracket tl"></span><span class="bracket tr"></span>
+      <span class="bracket bl"></span><span class="bracket br"></span>
+
+      <div class="hud-top">
+        <div class="hud-title mono">Observation Deck // <b>Nino Bär</b> · Frontend Dev</div>
+        <div class="hud-coords mono">
+          Sector <span>NB-04</span> · Cyan-Ion<br />
+          Lat <span>47.66°N</span> · Lon <span>9.17°E</span>
+        </div>
+      </div>
+
+      <div class="hud-lticks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+      <div class="hud-bottom">
+        <div class="hud-legend mono">
+          <b><span class="dotlive"></span>Systems nominal</b><b>Signal 98%</b>
+        </div>
+        <div class="mono">Nuxt · TypeScript · Tailwind</div>
+      </div>
     </div>
 
-    <div class="flex flex-col items-center gap-y-80 lg:pt-0">
-      <div
-        class="
-          scale-[0.8] mt-60
-          lg:absolute lg:top-[20%] lg:right-[25%] lg:mt-0
-        "
-      >
+    <button class="shutdown mono" @click="roryStore.onToggleDom()">◄ Power down observation</button>
+
+    <div class="scene">
+      <Target class="t-nebula" no="SPEC-03" label="Spectral Analysis" panel="tech" double-orbit>
         <Nebula />
-      </div>
-
-      <div
-        class="
-          scale-[0.8] mt-70 mr-auto flex
-          lg:absolute lg:top-[30%] lg:left-[35%] lg:mt-0 lg:mr-0
-        "
-      >
+      </Target>
+      <Target class="t-planet" no="OBJ-02" label="Payload Manifest" panel="projects" double-orbit>
         <Planet />
-      </div>
-
-      <div
-        class="
-          transition-transform duration-[1500ms] ease-in-out mt-70 mb-100
-          lg:absolute lg:left-[10%] lg:bottom-[20%] lg:my-0
-        "
-        :class="{
-          'lg:-translate-x-[150vw] opacity-0 lg:opacity-100': !isDomOpen,
-          'lg:translate-x-0': isDomOpen,
-        }"
-      >
+      </Target>
+      <Target class="t-sat" no="COM-04" label="Comms Uplink" panel="contact">
         <Satellite />
+      </Target>
+
+      <Observatory />
+
+      <div class="boot">
+        <button class="boot-btn mono" @click="roryStore.onToggleDom()">
+          <span class="tri"></span>Initialize observation
+        </button>
+        <div class="boot-hint">▸ open the dome to begin · click any target to read the log</div>
       </div>
     </div>
 
-    <div
-      class="
-        fixed bottom-0 left-0 z-10 h-[70%] w-full
-        bg-gradient-to-t from-black/95 to-transparent
-        pointer-events-none lg:hidden
-      "
-    ></div>
-
-    <div
-      class="
-        fixed -bottom-5 z-20
-        lg:absolute lg:scale-100 lg:left-auto lg:translate-x-0 lg:bottom-0 lg:z-auto
-      "
-    >
-      <Observatory />
-    </div>
-
-    <div
-      class="fixed ml-auto inset-7 z-50 transition-transform duration-[1000ms] ease-in-out lg:absolute lg:inset-auto lg:bottom-4 lg:right-4"
-      :class="{ 'translate-y-[150vh]': !isScreenOpen, 'translate-y-0': isScreenOpen }"
-    >
-      <Screen />
-    </div>
+    <!-- info console -->
+    <Screen />
   </div>
 </template>
 
 <script setup lang="ts">
-import Satellite from '~/components/common/objects/Satellite.vue';
-import Observatory from '~/components/common/objects/Observatory.vue';
+import { computed, ref, onMounted } from 'vue';
+import type { Ref } from 'vue';
+import { useRoryStore } from '~/stores/roryStore';
 import StarsBackground from '~/components/common/objects/StarsBackground.vue';
+import CursorEffect from '~/components/common/effects/CursorEffect.vue';
+import Target from '~/components/common/objects/Target.vue';
 import Nebula from '~/components/common/objects/Nebula.vue';
 import Planet from '~/components/common/objects/Planet.vue';
+import Satellite from '~/components/common/objects/Satellite.vue';
+import Observatory from '~/components/common/objects/Observatory.vue';
 import Screen from '~/components/common/objects/Screen.vue';
-import { useRoryStore } from '~/stores/roryStore';
-import { computed } from 'vue';
-import ScrollIndicator from '~/components/common/objects/ScrollIndicator.vue';
-import CursorEffect from '~/components/common/effects/CursorEffect.vue';
+
+useSeoMeta({
+  title: 'Nino Bär — Frontend Developer · Space',
+  ogTitle: 'Nino Bär · Space',
+  ogUrl: 'https://wannabelynx.github.io/space',
+});
+useHead({ link: [{ rel: 'canonical', href: 'https://wannabelynx.github.io/space' }] });
 
 const roryStore = useRoryStore();
 const isDomOpen: Ref<boolean> = computed(() => roryStore.isDomOpen);
-const isScreenOpen: Ref<boolean> = computed(() => roryStore.isScreenOpen);
 
 const isTouchDevice = ref(false);
 onMounted(() => {
-  isTouchDevice.value = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  isTouchDevice.value = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 });
 </script>

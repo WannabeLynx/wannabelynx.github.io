@@ -1,0 +1,13 @@
+{
+  "name": "Nino Bär — Frontend Developer",
+  "short_name": "Nino Bär",
+  "description": "Portfolio of Nino Bär (wannabelynx), Frontend Developer.",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ],
+  "theme_color": "#070B14",
+  "background_color": "#070B14",
+  "display": "standalone",
+  "start_url": "/"
+}

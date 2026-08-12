@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="NB — Nino Bär">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0C1424"/>
+      <stop offset="1" stop-color="#060A12"/>
+    </linearGradient>
+    <radialGradient id="bloom" cx="44%" cy="40%" r="58%">
+      <stop offset="0" stop-color="#F3C969" stop-opacity="0.24"/>
+      <stop offset="72%" stop-color="#F3C969" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="1.25" y="1.25" width="61.5" height="61.5" rx="13" fill="url(#bg)"
+        stroke="rgba(150,180,220,0.20)" stroke-width="1.5"/>
+  <rect x="1.25" y="1.25" width="61.5" height="61.5" rx="13" fill="url(#bloom)"/>
+  <text x="31" y="44" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', 'Noto Serif', serif" font-weight="700"
+        font-size="33" fill="#EAF0FA">NB</text>
+  <!-- gold sparkle, top-right of the mark -->
+  <path transform="translate(48.5,17)" fill="#F3C969"
+        d="M0 -6.4 L1.5 -1.5 L6.4 0 L1.5 1.5 L0 6.4 L-1.5 1.5 L-6.4 0 L-1.5 -1.5 Z"/>
+</svg>

@@ -25,6 +25,8 @@ import Projects from '~/components/main/Projects.vue';
 import TechStack from '~/components/main/TechStack.vue';
 import Contact from '~/components/main/Contact.vue';
 
+useHead({ link: [{ rel: 'canonical', href: 'https://wannabelynx.github.io/' }] });
+
 let io: IntersectionObserver | null = null;
 
 onMounted(() => {

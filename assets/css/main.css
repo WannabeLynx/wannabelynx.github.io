@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Manrope:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Manrope:wght@300..700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -12,7 +12,6 @@
 
 html { scroll-behavior: smooth; }
 
-/* hide the browser scrollbar while keeping the page scrollable */
 html {
   scrollbar-width: none;        /* Firefox */
   -ms-overflow-style: none;     /* IE / old Edge */
