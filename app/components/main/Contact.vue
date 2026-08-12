@@ -1,87 +1,63 @@
 <template>
-  <section class="relative pt-24 pb-5 px-6 md:px-12">
+  <section id="contact" class="relative pt-24 md:pt-32 pb-6 px-6 md:px-12">
     <GlowDivider color="primary" />
+    <div class="max-w-5xl mx-auto">
+      <header class="reveal mb-14">
+        <span class="block font-mono text-[.7rem] tracking-[.24em] uppercase text-primary mb-3.5">04 — Transmission</span>
+        <h2 class="font-lora font-medium text-foreground text-4xl md:text-5xl leading-tight" style="text-wrap:balance">Get In Touch</h2>
+        <div class="h-px mt-6" style="background:linear-gradient(90deg, var(--border), transparent)"></div>
+      </header>
 
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl md:text-5xl text-foreground mb-6 text-center">
-        {{ title }}
-      </h2>
-      
-      <p class="text-foreground/70 text-center mb-12 max-w-2xl mx-auto">
-        {{ subtitle }}
-      </p>
+      <div class="grid md:grid-cols-[1.1fr_.9fr] gap-10 md:gap-14 items-start">
+        <form class="reveal border border-[color:var(--border)] rounded-[2px] bg-[color:var(--popover)] p-6 md:p-8" @submit.prevent="handleSubmit">
+          <div class="flex justify-between font-mono text-[.66rem] tracking-[.2em] uppercase text-foreground/40 mb-6">
+            <span>◦ Message console</span>
+            <span class="text-secondary">● Online</span>
+          </div>
 
-      <div class="grid md:grid-cols-2 gap-12">
-        <!-- Contact Form -->
-        <div class="backdrop-blur-sm bg-popover/60 border border-primary/20 rounded-xl p-8 hover:border-primary/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(100,255,218,0.15)]">
-          <form @submit.prevent="handleSubmit" class="space-y-6">
-            <div class="space-y-2">
-              <label for="name" class="text-foreground text-sm font-medium">Name</label>
-              <input
-                id="name"
-                v-model="formData.name"
-                type="text"
-                placeholder="Your name"
-                required
-                class="w-full bg-popover/60 border border-primary/30 text-foreground placeholder:text-foreground/40 focus:border-primary focus:ring-primary/20 rounded-md p-2"
-              />
-            </div>
+          <div v-for="field in fields" :key="field.key" class="mb-[1.15rem]">
+            <label :for="field.key" class="block font-mono text-[.62rem] tracking-[.16em] uppercase text-foreground/60 mb-2">{{ field.label }}</label>
+            <input
+              v-if="field.key !== 'message'"
+              :id="field.key"
+              v-model="formData[field.key]"
+              :type="field.type"
+              :placeholder="field.placeholder"
+              required
+              class="w-full bg-[color:var(--background)] border border-[color:var(--border)] text-foreground placeholder:text-foreground/40 rounded-[2px] px-3.5 py-2.5 outline-none focus:border-primary/60 focus:ring-[3px] focus:ring-primary/15 transition-colors"
+            />
+            <textarea
+              v-else
+              :id="field.key"
+              v-model="formData.message"
+              rows="5"
+              :placeholder="field.placeholder"
+              required
+              class="w-full resize-none bg-[color:var(--background)] border border-[color:var(--border)] text-foreground placeholder:text-foreground/40 rounded-[2px] px-3.5 py-2.5 outline-none focus:border-primary/60 focus:ring-[3px] focus:ring-primary/15 transition-colors"
+            />
+          </div>
 
-            <div class="space-y-2">
-              <label for="email" class="text-foreground text-sm font-medium">Email</label>
-              <input
-                id="email"
-                v-model="formData.email"
-                type="email"
-                placeholder="your.email@example.com"
-                required
-                class="w-full bg-popover/60 border border-primary/30 text-foreground placeholder:text-foreground/40 focus:border-primary focus:ring-primary/20 rounded-md p-2"
-              />
-            </div>
+          <Button type="submit" variant="default" class="w-full">
+            Send transmission <span class="transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">↗</span>
+          </Button>
+          <p class="font-mono text-[.6rem] text-foreground/40 mt-3.5 text-center">Form isn't wired yet — the links are the real channel.</p>
+        </form>
 
-            <div class="space-y-2">
-              <label for="message" class="text-foreground text-sm font-medium">Message</label>
-              <textarea
-                id="message"
-                v-model="formData.message"
-                placeholder="Tell me about your project..."
-                required
-                rows="5"
-                class="w-full bg-popover/60 border border-primary/30 text-foreground placeholder:text-foreground/40 focus:border-primary focus:ring-primary/20 rounded-md p-2 resize-none"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              variant="default"
-              class="w-full !text-primary-foreground hover:shadow-glow group"
-            >
-              Send Message
-              <SendIcon class="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </Button>
-          </form>
-        </div>
-
-        <div class="space-y-8">
+        <!-- links + availability -->
+        <div class="reveal flex flex-col gap-4">
           <ConnectCard :links="socialLinks" />
-
-          <div class="backdrop-blur-sm bg-popover/60 border border-secondary/20 rounded-xl p-8 hover:border-secondary/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(224,64,251,0.15)]">
-            <h3 class="text-xl text-foreground mb-4">
-              {{ availabilityTitle }}
-            </h3>
-            <p class="text-foreground/70 leading-relaxed">
-              {{ availabilityText }}
-            </p>
+          <div class="border border-[color:var(--border)] rounded-[2px] bg-[color:var(--popover)] p-6">
+            <h3 class="font-lora text-foreground text-lg mb-2">{{ availabilityTitle }}</h3>
+            <p class="text-foreground/60 text-sm" style="text-wrap:pretty">{{ availabilityText }}</p>
           </div>
         </div>
       </div>
 
-      <div class="mt-24 text-center w-full text-foreground opacity-40">
-        <p>Built with Nuxt V4 & Tailwind V4</p>
-        <p>Background Image Credit: NASA, ESA, CSA, and M. Zamani (ESA)</p>
-        <p>© {{ new Date().getFullYear() }} All rights reserved.</p>
-
-      </div>
+      <footer class="mt-20 pt-8 border-t border-[color:var(--border)] text-center">
+        <p class="font-mono text-[.64rem] tracking-[.1em] uppercase text-foreground/35 leading-[2]">Built with Nuxt V4 &amp; Tailwind V4</p>
+        <p class="font-mono text-[.64rem] tracking-[.1em] uppercase text-foreground/35 leading-[2]">Background image credit: NASA, ESA, CSA, and M. Zamani (ESA)</p>
+        <p class="font-mono text-[.64rem] tracking-[.1em] uppercase text-foreground/35 leading-[2]"><span class="text-primary">✦</span> © {{ year }} Nino Bär — All rights reserved</p>
+      </footer>
     </div>
   </section>
 </template>
@@ -90,46 +66,31 @@
 import { h, ref } from 'vue';
 import { GlowDivider, Button, ConnectCard } from 'rory-components';
 
-// --- Local Icon Components ---
-const SendIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '24', height: '24', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, [h('path', { d: 'm22 2-7 20-4-9-9-4Z' }), h('path', { d: 'M22 2 11 13' })]);
-const GithubIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '24', height: '24', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'w-6 h-6 text-primary' }, [
-  h('path', { d: 'M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4' }),
-  h('path', { d: 'M9 18c-4.51 2-5-2-7-2' }),
-]);
+const stroke = (children: any[]) => h('svg', { xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, children);
 
-const LinkedinIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '24', height: '24', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'w-6 h-6 text-secondary' }, [
-  h('path', { d: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z' }),
-  h('rect', { width: '4', height: '12', x: '2', y: '9' }),
-  h('circle', { cx: '4', cy: '4', r: '2' }),
-]);
-
-const MailIcon = () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: '24', height: '24', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'w-6 h-6 text-accent' }, [
-   h('path', { d: 'm22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7' }),
-   h('rect', { x: '2', y: '4', width: '20', height: '16', rx: '2' }),
-]);
+const GithubIcon = () => stroke([h('path', { d: 'M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4' }), h('path', { d: 'M9 18c-4.51 2-5-2-7-2' })]);
+const LinkedinIcon = () => stroke([h('path', { d: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z' }), h('rect', { width: '4', height: '12', x: '2', y: '9' }), h('circle', { cx: '4', cy: '4', r: '2' })]);
+const MailIcon = () => stroke([h('rect', { x: '2', y: '4', width: '20', height: '16', rx: '2' }), h('path', { d: 'm22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7' })]);
 
 const socialLinks = [
-  { label: "GitHub", icon: GithubIcon, url: "https://github.com/WannabeLynx" },
-  { label: "LinkedIn", icon: LinkedinIcon, url: "https://linkedin.com/in/nino-baer/" },
-  { label: "Email", icon: MailIcon, url: "mailto:ninoleonbaer@gmail.com" },
+  { label: 'GitHub', icon: GithubIcon, url: 'https://github.com/WannabeLynx', hint: '@WannabeLynx' },
+  { label: 'LinkedIn', icon: LinkedinIcon, url: 'https://linkedin.com/in/nino-baer/', hint: 'nino-baer' },
+  { label: 'Email', icon: MailIcon, url: 'mailto:ninoleonbaer@gmail.com', hint: '' },
 ];
 
-const title = 'Get In Touch';
-const subtitle = "Contact does not work yet :) But the links do!";
-const availabilityTitle = 'ขอบคุณที่เข้ามาเยี่ยมชมเว็บไซต์ของผม'
-const availabilityText = "Thank you for visiting my website";
+const fields = [
+  { key: 'name' as const, label: 'Name', type: 'text', placeholder: 'Your name' },
+  { key: 'email' as const, label: 'Email', type: 'email', placeholder: 'your.email@example.com' },
+  { key: 'message' as const, label: 'Message', type: 'text', placeholder: 'Tell me about your project…' },
+];
 
-// --- Form State ---
-const formData = ref({
-  name: "",
-  email: "",
-  message: ""
-});
+const availabilityTitle = 'ขอบคุณที่เข้ามาเยี่ยมชมเว็บไซต์ของผม';
+const availabilityText = 'Thank you for visiting my website.';
+const year = new Date().getFullYear();
+
+const formData = ref<{ name: string; email: string; message: string }>({ name: '', email: '', message: '' });
 
 const handleSubmit = () => {
-  console.log("Form submitted:", formData.value);
-  alert("");
-  formData.value = { name: "", email: "", message: "" };
+  formData.value = { name: '', email: '', message: '' };
 };
-
 </script>

@@ -5,6 +5,12 @@
     "projects": "Projekte",
     "contact": "Kontakt"
   },
+  "variants": {
+    "label": "Ansicht",
+    "modern": "Modern",
+    "space": "Space",
+    "three": "3D"
+  },
   "satellite": {
     "closed": "Aus",
     "open": "An"

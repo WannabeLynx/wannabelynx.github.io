@@ -1,12 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..600&family=Manrope:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
+  --font-sans: 'Manrope', system-ui, sans-serif;
   --font-manrope: 'Manrope', sans-serif;
   --font-lora: 'Lora', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
-  --color-gray-custom-darker: #a0a0a5;
-  --color-gray-custom-dark: #b0b0b5;
-  --color-gray-custom-light: #d0d0d5;
+  --ease-stellar: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+/* scroll-reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s var(--ease-stellar), transform .7s var(--ease-stellar);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* constellation draw-in */
+.cline {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.6s var(--ease-stellar) .3s;
+}
+.constellation.drawn .cline { stroke-dashoffset: 0; }
+
+/* hero name bloom + starlight pulse */
+@keyframes stellar-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes stellar-drop {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .cline { stroke-dashoffset: 0; }
+  .stellar-anim { animation: none !important; }
 }
