@@ -37,10 +37,24 @@
             />
           </div>
 
-          <Button type="submit" variant="default" class="w-full">
-            Send transmission <span class="transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">↗</span>
+          <input
+            v-model="botField"
+            type="text"
+            name="botcheck"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+            class="hidden"
+          />
+
+          <Button type="submit" variant="default" class="w-full" :disabled="status === 'sending'">
+            <template v-if="status === 'sending'">Transmitting…</template>
+            <template v-else>Send transmission <span class="transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">↗</span></template>
           </Button>
-          <p class="font-mono text-[.6rem] text-foreground/40 mt-3.5 text-center">Form isn't wired yet — the links are the real channel.</p>
+
+          <p v-if="status === 'success'" class="font-mono text-[.6rem] text-secondary mt-3.5 text-center">✦ Transmission received — thank you, I'll be in touch.</p>
+          <p v-else-if="status === 'error'" class="font-mono text-[.6rem] text-destructive mt-3.5 text-center">{{ errorMessage }}</p>
+          <p v-else class="font-mono text-[.6rem] text-foreground/40 mt-3.5 text-center">Or reach me directly through the channels →</p>
         </form>
 
         <!-- links + availability -->
@@ -87,9 +101,50 @@ const availabilityTitle = 'ขอบคุณที่เข้ามาเย�
 const availabilityText = 'Thank you for visiting my website.';
 const year = new Date().getFullYear();
 
-const formData = ref<{ name: string; email: string; message: string }>({ name: '', email: '', message: '' });
+const WEB3FORMS_ACCESS_KEY = 'd4423b4d-1b0d-4436-91bf-6d2848b980ab';
 
-const handleSubmit = () => {
-  formData.value = { name: '', email: '', message: '' };
+const formData = ref<{ name: string; email: string; message: string }>({ name: '', email: '', message: '' });
+const botField = ref('');
+const status = ref<'idle' | 'sending' | 'success' | 'error'>('idle');
+const errorMessage = ref('');
+
+const handleSubmit = async () => {
+  if (status.value === 'sending') return;
+
+  if (botField.value) {
+    status.value = 'success';
+    formData.value = { name: '', email: '', message: '' };
+    return;
+  }
+
+  status.value = 'sending';
+  errorMessage.value = '';
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `Portfolio contact — ${formData.value.name || 'someone'}`,
+        from_name: 'Nino Bär Portfolio',
+        name: formData.value.name,
+        email: formData.value.email,
+        message: formData.value.message,
+      }),
+    });
+    const data = await res.json();
+
+    if (res.ok && data.success) {
+      status.value = 'success';
+      formData.value = { name: '', email: '', message: '' };
+    } else {
+      status.value = 'error';
+      errorMessage.value = data.message || 'Could not send — please use the email link instead.';
+    }
+  } catch {
+    status.value = 'error';
+    errorMessage.value = 'Network error — please use the email link instead.';
+  }
 };
 </script>

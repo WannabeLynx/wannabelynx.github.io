@@ -2,6 +2,8 @@
   <nav
     :aria-label="t('variants.label')"
     class="switcher"
+    :class="{ 'is-hidden': !atTop }"
+    :aria-hidden="!atTop || undefined"
     :style="{ '--sw-accent-rgb': accent }"
   >
     <div ref="segEl" class="seg">
@@ -61,13 +63,23 @@ const measure = (): void => {
   pill.value = { x: r.left - sr.left, w: r.width };
 };
 
+const atTop = ref(true);
+let onScroll: (() => void) | null = null;
+
 watch(activeIndex, () => nextTick(measure));
 onMounted(() => {
   nextTick(measure);
   if (typeof document !== 'undefined' && document.fonts?.ready) document.fonts.ready.then(measure);
   window.addEventListener('resize', measure);
+
+  onScroll = () => { atTop.value = window.scrollY <= 6; };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 });
-onBeforeUnmount(() => window.removeEventListener('resize', measure));
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', measure);
+  if (onScroll) window.removeEventListener('scroll', onScroll);
+});
 </script>
 
 <style scoped>
@@ -76,6 +88,12 @@ onBeforeUnmount(() => window.removeEventListener('resize', measure));
   top: 24px;
   right: 26px;
   z-index: 60;
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.switcher.is-hidden {
+  opacity: 0;
+  transform: translateY(-18px);
+  pointer-events: none;
 }
 .seg {
   position: relative;
@@ -131,8 +149,20 @@ onBeforeUnmount(() => window.removeEventListener('resize', measure));
 .seg-link.active .idx {
   opacity: 0.9;
 }
+@media (max-width: 1024px) {
+  .switcher {
+    top: 64px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .switcher.is-hidden {
+    transform: translateX(-50%) translateY(-18px);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .pill {
+  .pill,
+  .switcher {
     transition: none;
   }
 }
