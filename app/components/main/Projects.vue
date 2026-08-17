@@ -68,6 +68,7 @@ import Polyrhytmic from '../../assets/images/Polyrhytmic.png';
 import GuessGame from '../../assets/images/GuessGame.png';
 import RoryGraphViewer from '../../assets/images/RoryGraphViewer.png';
 import Storybook from '../../assets/images/Storybook.png';
+import DualSub from '../../assets/images/DualSub.png';
 
 const projects = [
   {
@@ -103,7 +104,7 @@ const projects = [
     type: 'Chrome Extension · DX',
     title: 'Netflix - Dual Subtitles',
     description: 'A Chrome extension I built to have dual subtitles in Netflix. Uses the official subtitles tracks.',
-    image: RoryGraphViewer,
+    image: DualSub,
     tags: ['HTML', 'JavaScript'],
     github: 'https://github.com/WannabeLynx/DualSub',
     demo: 'https://chromewebstore.google.com/detail/dual-subtitles-%E2%80%93-two-lang/lobapcibapolfiefnpgdfaggejpbbhje?authuser=0&hl=de',
