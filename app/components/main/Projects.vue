@@ -100,6 +100,16 @@ const projects = [
   },
   {
     desig: 'OBJ-04',
+    type: 'Chrome Extension · DX',
+    title: 'Netflix - Dual Subtitles',
+    description: 'A Chrome extension I built to have dual subtitles in Netflix. Uses the official subtitles tracks.',
+    image: RoryGraphViewer,
+    tags: ['HTML', 'JavaScript'],
+    github: 'https://github.com/WannabeLynx/DualSub',
+    demo: 'https://chromewebstore.google.com/detail/dual-subtitles-%E2%80%93-two-lang/lobapcibapolfiefnpgdfaggejpbbhje?authuser=0&hl=de',
+  },
+  {
+    desig: 'OBJ-05',
     type: 'Library · Open Source',
     title: 'Rory Components',
     description: 'My small components library, published to npm. Still adding more.',
